@@ -1,6 +1,50 @@
+### System-generated files ###
 .DS_Store
+Thumbs.db
+
+### Node.js dependencies ###
 /node_modules/
 
-# React Router
+### React Router files ###
 /.react-router/
+
+### Build output ###
 /build/
+
+### IDE/editor configurations ###
+.idea/
+/.vscode/
+*.code-workspace
+
+### Backup and temporary files ###
+*.swp
+*.swo
+*~
+*.tmp
+
+### Log files ###
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+### Environment configuration files ###
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+### Linting tools ###
+eslintdebug.log
+
+### Test coverage output ###
+/coverage/
+
+### Lock files ###
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+### Cache folders ###
+/.parcel-cache/
+*.cache
