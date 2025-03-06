@@ -17,31 +17,37 @@ const MenuItems: React.FC<MenuItemsProps> = ({
       .map((route, index): React.ReactElement => {
         if (!route.path) {
           return <React.Fragment key={`empty-${index}`} />;
-        } else if (route.children && route.children.length > 0) {
-          return (
-            <li key={route.id}>
-              <details>
-                <summary>{cfl(route.path)}</summary>
-                <ul className="p-2">
-                  {renderMenuItems(
-                    route.children,
-                    hrefPrefix && hrefPrefix.length > 0
-                      ? `${hrefPrefix}/${route.path}`
-                      : route.path,
-                  )}
-                </ul>
-              </details>
-            </li>
+        } else if (route.children) {
+          const validChildren = route.children.filter(
+            (route) => route.path && !route.path.includes(":"),
           );
-        } else {
-          return (
-            <li key={route.id}>
-              <NavLink to={`${hrefPrefix}/${route.path}`}>
-                {cfl(route.path)}
-              </NavLink>
-            </li>
-          );
+
+          if (validChildren.length > 0) {
+            return (
+              <li key={route.id}>
+                <details>
+                  <summary>{cfl(route.path)}</summary>
+                  <ul className="p-2">
+                    {renderMenuItems(
+                      validChildren,
+                      hrefPrefix && hrefPrefix.length > 0
+                        ? `${hrefPrefix}/${route.path}`
+                        : route.path,
+                    )}
+                  </ul>
+                </details>
+              </li>
+            );
+          }
         }
+
+        return (
+          <li key={route.id}>
+            <NavLink to={`${hrefPrefix}/${route.path}`}>
+              {cfl(route.path)}
+            </NavLink>
+          </li>
+        );
       });
   };
 
