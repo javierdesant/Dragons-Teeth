@@ -1,5 +1,5 @@
 import React from "react";
-import { route, type RouteConfigEntry } from "@react-router/dev/routes";
+import { type RouteConfigEntry } from "@react-router/dev/routes";
 import { cfl } from "~/utils/stringUtils";
 import routes from "~/routes";
 import { NavLink } from "react-router";
@@ -14,9 +14,9 @@ const MenuItems: React.FC<MenuItemsProps> = ({
   const renderMenuItems = (routes: RouteConfigEntry[], hrefPrefix?: string) => {
     return routes
       .sort((a, b) => (a.path || "").localeCompare(b.path || ""))
-      .map((route): React.ReactElement => {
+      .map((route, index): React.ReactElement => {
         if (!route.path) {
-          return <></>;
+          return <React.Fragment key={`empty-${index}`} />;
         } else if (route.children && route.children.length > 0) {
           return (
             <li key={route.id}>
