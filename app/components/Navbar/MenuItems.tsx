@@ -3,16 +3,17 @@ import { type RouteConfigEntry } from "@react-router/dev/routes";
 import { cfl } from "~/utils/stringUtils";
 import routes from "~/routes";
 import { NavLink } from "react-router";
+import { useNavbar } from "~/components/Navbar/NavbarContext";
 
-interface MenuItemsProps {
-  hrefPrefix?: string;
-}
+const MenuItems: React.FC = (): React.ReactElement => {
+  const { filters = [], hrefPrefix = "" } = useNavbar();
 
-const MenuItems: React.FC<MenuItemsProps> = ({
-  hrefPrefix = "",
-}): React.ReactElement => {
   const renderMenuItems = (routes: RouteConfigEntry[], hrefPrefix?: string) => {
     return routes
+      .filter(
+        (route) =>
+          route.path && !filters.some((path) => route.path?.includes(path)),
+      )
       .sort((a, b) => (a.path || "").localeCompare(b.path || ""))
       .map((route, index): React.ReactElement => {
         if (!route.path) {
