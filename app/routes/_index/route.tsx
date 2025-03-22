@@ -1,4 +1,6 @@
 import type { Route } from "./+types/route";
+import Hero from "./Hero";
+import Events from "./Events";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,5 +10,10 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <div>home</div>;
+  return (
+    <>
+      <Hero />
+      <Events />
+    </>
+  );
 }
